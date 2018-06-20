@@ -21,6 +21,7 @@ export default class App {
       })
       .then(stream => {
         this.localStream = stream;
+        this.setLocalVideo();
         this.username = prompt('What is your name?', 'Guest');
         this.createConnection();
       })
@@ -47,10 +48,14 @@ export default class App {
     });
 
     this.p2p.onStream(peer => {
-      this.streams.push({
+      let item = {
         user: peer,
         stream: peer.getStream()
-      });
+      };
+
+      this.streams.push(item);
+
+      this.createVideoStream(item);
     });
 
     this.p2p.onClose(id => {
@@ -63,6 +68,8 @@ export default class App {
   }
 
   createVideoStream(item) {
+    console.log('Create stream', item);
+
     let video = document.createElement('video');
     video.srcObject = item.stream;
     video.setAttribute('data-peer', item.user.getId());
@@ -80,7 +87,7 @@ export default class App {
   }
 
   setLocalVideo() {
-    let video = document.querySelector('local-video');
+    let video = document.querySelector('.local-video');
 
     if (video) {
       video.srcObject = this.localStream;

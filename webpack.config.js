@@ -1,5 +1,10 @@
 const path = require('path');
+const argv = require('yargs').argv;
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const distPath = path.join(__dirname, '/');
+
+const isDevelopment = argv.mode === 'development';
+const isProduction = !isDevelopment;
 
 module.exports = {
   entry: './index.js',
@@ -24,7 +29,7 @@ module.exports = {
       }
     ]
   },
-  optimization: {
+  optimization: isProduction ? {
     minimizer: [
       new UglifyJsPlugin({
         sourceMap: true,
@@ -38,5 +43,5 @@ module.exports = {
         },
       }),
     ],
-  },
+  } : {}
 };

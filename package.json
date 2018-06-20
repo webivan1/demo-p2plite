@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --mode production --colors --progress",
+    "watch": "webpack --mode development --watch",
+    "build": "webpack --mode production --colors --progress",
     "signalhub": "signalhub listen -p 3000"
   },
   "author": "Ivan Maltsev (webivan1)",
   "license": "MIT",
   "dependencies": {
-    "p2plite": "0.0.1",
+    "p2plite": "0.0.2",
     "signalhub": "^4.9.0"
   },
   "devDependencies": {
@@ -19,6 +20,7 @@
     "webpack-cli": "^3.0.8",
     "@babel/core": "^7.0.0-beta.51",
     "@babel/preset-env": "^7.0.0-beta.51",
-    "babel-loader": "^8.0.0-beta.3"
+    "babel-loader": "^8.0.0-beta.3",
+    "uglifyjs-webpack-plugin": "^1.2.3"
   }
 }
